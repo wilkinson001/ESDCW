@@ -1,5 +1,6 @@
 package com;
 import java.io.*;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -17,6 +18,7 @@ public class login extends HttpServlet {
             
             response.setContentType("text/html;");
             
+
             ServletContext sc = request.getServletContext();
             Connection con = (Connection)sc.getAttribute("connection");
             JdbcUserQry jdbc = new JdbcUserQry();
@@ -45,4 +47,6 @@ public class login extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+
 }
+

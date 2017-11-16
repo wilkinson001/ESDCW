@@ -18,6 +18,10 @@
         <servlet-name>login</servlet-name>
         <servlet-class>com.login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>login</servlet-name>
+        <servlet-class>com.login</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>coursework</servlet-name>
         <url-pattern>/coursework</url-pattern>
