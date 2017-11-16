@@ -107,12 +107,33 @@ public class JdbcUserQry {
             System.out.println("way way"+e);
         }
     }
+    
     public String retrieve(String query) throws SQLException {
         String results="";
         select(query);
 
         return makeTable(rsToList());//results;
     }
+    
+    
+    public boolean login(String query) throws SQLException{
+        Statement statement = null;
+        boolean login=false;
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+        }
+        catch(SQLException e) {
+            System.out.println("way way"+e);
+        }
+        
+        if(rs.next()==true){
+            login=true;
+        }
+        
+        return login;
+    }
+
     
     public boolean exists(String user) {
         boolean bool = false;

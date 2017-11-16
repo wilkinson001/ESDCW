@@ -27,12 +27,12 @@ public class login extends HttpServlet {
             String uname = request.getParameter("username");
             String pword = request.getParameter("password");
             String qry = "Select * from ROOT.users where USERS.\"id\"='"+uname+"' and USERS.\"password\"='"+pword+"'";
-            String res;
+            boolean res;
             try {
-                res = jdbc.retrieve(qry);
+                res = jdbc.login(qry);
                 PrintWriter out = response.getWriter();
-                if(res!=null){
-                    out.println(res);
+                if(res==true){
+                    response.sendRedirect(request.getContextPath()+"/dashboard.jsp");
                 } else {
                     out.println("Username or Password is Incorrect");
                 }
