@@ -96,7 +96,7 @@ public class JdbcUserQry {
     }//makeTable
   
     private void select(String query){
-        //Statement statement = null;
+        Statement statement = null;
         
         try {
             statement = connection.createStatement();
@@ -105,7 +105,6 @@ public class JdbcUserQry {
         }
         catch(SQLException e) {
             System.out.println("way way"+e);
-            //results = e.toString();
         }
     }
     public String retrieve(String query) throws SQLException {
