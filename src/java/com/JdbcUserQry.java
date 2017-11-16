@@ -138,7 +138,7 @@ public class JdbcUserQry {
     public boolean exists(String user) {
         boolean bool = false;
         try  {
-            select("select username from users where username='"+user+"'");
+            select("select USERS.\"id\" from ROOT.users where USERS.\"id\"='"+user+"'");
             if(rs.next()) {
                 System.out.println(user+" exits in the DB");         
                 bool = true;

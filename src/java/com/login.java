@@ -32,7 +32,9 @@ public class login extends HttpServlet {
                 res = jdbc.login(qry);
                 PrintWriter out = response.getWriter();
                 if(res==true){
-                    response.sendRedirect(request.getContextPath()+"/dashboard.jsp");
+                    request.setAttribute("user", uname);
+                    RequestDispatcher view = request.getRequestDispatcher("dashboard.jsp");
+                    view.forward(request,response);
                 } else {
                     out.println("Username or Password is Incorrect");
                 }
