@@ -9,9 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Dashboard</title>
     </head>
     <body>
-        <h1>Welcome <%String details = (String) request.getAttribute("user"); out.print(details);%></h1>
+        <h1>Welcome <%
+            String name = (String) request.getAttribute("user"); 
+            out.print(name);
+        %></h1>
     </body>
 </html>

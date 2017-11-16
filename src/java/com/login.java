@@ -30,9 +30,11 @@ public class login extends HttpServlet {
             boolean res;
             try {
                 res = jdbc.login(qry);
+                String type = jdbc.userType(uname);
                 PrintWriter out = response.getWriter();
                 if(res==true){
                     request.setAttribute("user", uname);
+                    request.setAttribute("type", type);
                     RequestDispatcher view = request.getRequestDispatcher("dashboard.jsp");
                     view.forward(request,response);
                 } else {

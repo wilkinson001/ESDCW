@@ -133,6 +133,14 @@ public class JdbcUserQry {
         
         return login;
     }
+    
+    public String userType(String user) throws SQLException{
+        String type="";
+        select("Select USERS.\"Status\" from ROOT.USERS where USERS.\"id\"='"+user+"'");
+        
+        type = rs.getString("STATUS");
+        return type;
+    }
 
     
     public boolean exists(String user) {
