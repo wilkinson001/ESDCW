@@ -28,15 +28,15 @@ public class JdbcUserQry {
     Connection connection = null;
     Statement statement = null;
     ResultSet rs = null;
-    //String query = null;
+    String query = null;
     
     
     public JdbcUserQry(String query){
-        //this.query = query;
+        this.query = query;
     }
 
     public JdbcUserQry() {
-        //this.query = "";
+        this.query = "";
     }
     
     public void connect(Connection con){
