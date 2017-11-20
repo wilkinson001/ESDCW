@@ -18,7 +18,8 @@ public class login extends HttpServlet {
             
             response.setContentType("text/html;");
             
-
+            HttpSession session = request.getSession();
+            
             ServletContext sc = request.getServletContext();
             Connection con = (Connection)sc.getAttribute("connection");
             JdbcUserQry jdbc = new JdbcUserQry();
@@ -34,12 +35,14 @@ public class login extends HttpServlet {
                 System.out.println(type);
                 PrintWriter out = response.getWriter();
                 if(res==true){
-                    request.setAttribute("user", uname);
-                    request.setAttribute("type", type);
+                    //request.setAttribute("user", uname);
+                    //request.setAttribute("type", type);
+                    session.setAttribute("user",uname);
+                    session.setAttribute("type", type);
                     if(type.equals("ADMIN")){
                         response.sendRedirect("admin.java");
                     }else {
-                        response.sendRedirect("member.java");
+                        response.sendRedirect("member.do");
                     }
                 } else {
                     out.println("Username or Password is Incorrect");

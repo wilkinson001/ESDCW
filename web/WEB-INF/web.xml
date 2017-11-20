@@ -21,6 +21,10 @@
         <servlet-name>register</servlet-name>
         <servlet-class>com.register</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>member</servlet-name>
+        <servlet-class>com.member</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>coursework</servlet-name>
         <url-pattern>/coursework</url-pattern>
@@ -33,9 +37,13 @@
         <servlet-name>register</servlet-name>
         <url-pattern>/register.do</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>member</servlet-name>
+        <url-pattern>/member.do</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            20
         </session-timeout>
     </session-config>
 </web-app>

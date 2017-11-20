@@ -78,20 +78,19 @@ public class JdbcUserQry {
     private String makeTable(ArrayList list) {
         StringBuilder b = new StringBuilder();
         String[] row;
-        b.append(String.format("%-12s %-12s\n","Username","Password"));
-        b.append("================================");
+        b.append("<br>================================<br>");
         for (Object s : list) {
           b.append("\n");
           row = (String[]) s;
             for (String row1 : row) {
-                //b.append("\t");
+                b.append("\t");
                 b.append(String.format("%-12s",row1));
-                //b.append("\t");
+                b.append("\t");
             }//for
          // b.append("\n");
         } // for
         b.append("\n");
-        b.append("================================");
+        b.append("<br>================================");
         return b.toString();
     }//makeTable
   
@@ -104,7 +103,7 @@ public class JdbcUserQry {
             //statement.close();
         }
         catch(SQLException e) {
-            System.out.println("way way"+e);
+            System.out.println("error in: "+query+" : "+e);
         }
     }
     
@@ -121,6 +120,24 @@ public class JdbcUserQry {
             res=-1;
         }
         return res;
+    }
+    
+    public double balance(String uname){
+        double bal=0;
+        Statement statement = null;
+        String qry = "Select MEMBERS.\"balance\" from ROOT.members where members.\"id\"='" + uname+"'";
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery(qry);
+            if(rs.next()){
+                bal=rs.getDouble(1);
+            }
+        }
+        catch(SQLException e) {
+            System.out.println(e);
+        }
+        
+        return bal;
     }
     
     public String retrieve(String query) throws SQLException {
@@ -151,9 +168,11 @@ public class JdbcUserQry {
     
     public String userType(String user) throws SQLException{
         String type="";
-        select("Select USERS.\"Status\" from ROOT.USERS where USERS.\"id\"='"+user+"' group by status");
-        
-        type = rs.getString("STATUS");
+        select("Select USERS.\"status\" from ROOT.USERS where USERS.\"id\"='"+user+"' group by USERS.\"status\"");
+        if(rs.next()){
+            type = rs.getString(1);
+            System.out.println(type);
+        }
         return type;
     }
 

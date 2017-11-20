@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Welcome <%
-            String name = (String) request.getAttribute("user");
+            String name = (String) session.getAttribute("user");
             out.print(name);
             %>
         </h1>
@@ -26,12 +26,14 @@
             
             <label><b>Outstanding balance: </b></label>
             <%
-                String balance = (String) request.getAttribute("balance");
+                Object b = session.getAttribute("balance");
+                String balance = b.toString();
+                //String balance = (String) session.getAttribute("balance");
                 out.print("£" + balance);
             %> <br><br>
             <label><b>Claims made: </b> </label>
             <%
-                String claim = (String) request.getAttribute("claim");
+                String claim = (String)session.getAttribute("claims");
                 out.print(claim);
             %> <br><br>
             <button type="submit">Log Out</button>
