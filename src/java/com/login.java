@@ -35,8 +35,13 @@ public class login extends HttpServlet {
                 if(res==true){
                     request.setAttribute("user", uname);
                     request.setAttribute("type", type);
-                    RequestDispatcher view = request.getRequestDispatcher("dashboard.jsp");
-                    view.forward(request,response);
+                    if(type.equals("ADMIN")){
+                        RequestDispatcher view = request.getRequestDispatcher("admin.java");
+                        view.forward(request,response);
+                    }else {
+                        RequestDispatcher view = request.getRequestDispatcher("member.java");
+                        view.forward(request,response);
+                    }
                 } else {
                     out.println("Username or Password is Incorrect");
                 }
