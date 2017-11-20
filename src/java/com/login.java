@@ -31,16 +31,15 @@ public class login extends HttpServlet {
             try {
                 res = jdbc.login(qry);
                 String type = jdbc.userType(uname);
+                System.out.println(type);
                 PrintWriter out = response.getWriter();
                 if(res==true){
                     request.setAttribute("user", uname);
                     request.setAttribute("type", type);
                     if(type.equals("ADMIN")){
-                        RequestDispatcher view = request.getRequestDispatcher("admin.java");
-                        view.forward(request,response);
+                        response.sendRedirect("admin.java");
                     }else {
-                        RequestDispatcher view = request.getRequestDispatcher("member.java");
-                        view.forward(request,response);
+                        response.sendRedirect("member.java");
                     }
                 } else {
                     out.println("Username or Password is Incorrect");

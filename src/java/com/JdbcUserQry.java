@@ -151,7 +151,7 @@ public class JdbcUserQry {
     
     public String userType(String user) throws SQLException{
         String type="";
-        select("Select USERS.\"Status\" from ROOT.USERS where USERS.\"id\"='"+user+"'");
+        select("Select USERS.\"Status\" from ROOT.USERS where USERS.\"id\"='"+user+"' group by status");
         
         type = rs.getString("STATUS");
         return type;
