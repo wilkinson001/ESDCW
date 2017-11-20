@@ -1,6 +1,6 @@
 <%-- 
     Document   : memberDashboard
-    Created on : 16-Nov-2017, 11:14:15
+    Created on : 20-Nov-2017, 11:14:15
     Author     : Ashley
 --%>
 
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Member_Dashboard</title>
+        <title>Member dashboard</title>
     </head>
     <body>
         <h1>Welcome <%
@@ -18,18 +18,21 @@
             %>
         </h1>
         <div>
-            <button type="submit">Payment</button><br><br>
-            <button type="submit">Claim</button> <br><br>
+
+            <form action='memberDashboard.do' method=POST>              
+                <button type = "submit">Make a payment</button><br><br>
+                <button type = "submit">Make a claim</button><br><br>
+            </form>
             
-            <label><b>Outstanding Balance: </b></label>
+            <label><b>Outstanding balance: </b></label>
             <%
-            String balance = (String) request.getAttribute("balance");
-            out.print(balance);
+                String balance = (String) request.getAttribute("balance");
+                out.print("£" + balance);
             %> <br><br>
-            <label><b>Claims Made: </b> </label>
+            <label><b>Claims made: </b> </label>
             <%
-            String claim = (String) request.getAttribute("claim");
-            out.print(claim);
+                String claim = (String) request.getAttribute("claim");
+                out.print(claim);
             %> <br><br>
             <button type="submit">Log Out</button>
         </div>
