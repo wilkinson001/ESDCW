@@ -26,8 +26,13 @@
                 
                 <label><b>Date of Birth</b></label>
                 <input type="date" placeholder="Enter Date of Birth" name="dob" required><br><br>
-                
-                
+            <%    
+            String error = (String) request.getAttribute("error");
+            
+            if(error!=null){
+                out.println(error+"<br>");
+            }
+            %>
                 <button type="submit">Register</button>
             </form>
         </div>

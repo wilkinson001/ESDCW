@@ -55,8 +55,8 @@ public class register extends HttpServlet {
                     i = true;
                 }
             }
-            
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+            uname=uname.toLowerCase();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String dor = df.format(new Date());
             String uuid = UUID.randomUUID().toString();
             String pword = uuid.replace("-", "");
@@ -66,8 +66,24 @@ public class register extends HttpServlet {
             System.out.println(address);
             System.out.println(pword);
             System.out.println(uname);
-            String qry = "insert into ROOT.MEMBERS values ('"+uname+"','"+name+"','"+address+"','"+dob+"','"+dor+"','APPLIED','0.00')";
+            System.out.println(dob);
+            System.out.println(dor);
+            String qry = "insert into ROOT.MEMBERS values ('"+uname+"','"+name+"','"+address+"','"+java.sql.Date.valueOf(dob)+"','"+java.sql.Date.valueOf(dor)+"','APPLIED',10.00)";
             String qry2 = "insert into ROOT.USERS values ('"+uname+"','"+pword+"','APPLIED')";
+            int res1 = jdbc.insert(qry);
+            int res2 = jdbc.insert(qry2);
+            if(res1==-1 || res2==-1){
+                System.out.println("Error in registration");
+                request.setAttribute("error","error in registration");
+                RequestDispatcher view = request.getRequestDispatcher("register.jsp");
+                view.forward(request,response);
+            }else {
+                request.setAttribute("user", uname);
+                request.setAttribute("pword", pword);
+                RequestDispatcher view = request.getRequestDispatcher("registered.jsp");
+                view.forward(request,response);
+            }
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

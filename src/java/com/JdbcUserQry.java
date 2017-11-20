@@ -95,7 +95,7 @@ public class JdbcUserQry {
         return b.toString();
     }//makeTable
   
-    private void select(String query){
+    public void select(String query){
         Statement statement = null;
         
         try {
@@ -106,6 +106,21 @@ public class JdbcUserQry {
         catch(SQLException e) {
             System.out.println("way way"+e);
         }
+    }
+    
+    public int insert(String qry){
+        Statement statement = null;
+        int res = 0;
+        try {
+            statement = connection.createStatement();
+            res = statement.executeUpdate(qry);
+            //statement.close();
+        }
+        catch(SQLException e) {
+            System.out.println(e);
+            res=-1;
+        }
+        return res;
     }
     
     public String retrieve(String query) throws SQLException {
@@ -156,21 +171,21 @@ public class JdbcUserQry {
         }
         return bool;
     }
-    public void insert(String[] str){
-        PreparedStatement ps = null;
-        try {
-            ps = connection.prepareStatement("INSERT INTO users VALUES (?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setString(1, str[0].trim()); 
-            ps.setString(2, str[1]);
-            ps.executeUpdate();
-        
-            ps.close();
-            System.out.println("1 row added.");
-        } catch (SQLException ex) {
-            Logger.getLogger(JdbcUserQry.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         
-    }
+//    public void insert(String[] str){
+//        PreparedStatement ps = null;
+//        try {
+//            ps = connection.prepareStatement("INSERT INTO users VALUES (?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+//            ps.setString(1, str[0].trim()); 
+//            ps.setString(2, str[1]);
+//            ps.executeUpdate();
+//        
+//            ps.close();
+//            System.out.println("1 row added.");
+//        } catch (SQLException ex) {
+//            Logger.getLogger(JdbcUserQry.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//         
+//    }
     public void update(String[] str) {
         PreparedStatement ps = null;
         try {
@@ -210,37 +225,37 @@ public class JdbcUserQry {
         }
     }
     public static void main(String[] args) throws SQLException {
-        String str = "select * from users";
-        String insert = "INSERT INTO `users` (`username`, `password`) VALUES ('meaydin', 'meaydin')";
-        String update = "UPDATE `users` SET `password`='eaydin' WHERE `username`='eaydin' ";
-        String db = "xyz";
-        
-        JdbcUserQry jdbc = new JdbcUserQry(str);
-        Connection conn = null;
-                try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db.trim(), "root", "root");
-        }
-        catch(ClassNotFoundException | SQLException e){
-            
-        }
-        jdbc.connect(conn);
-        String [] users = {"birgul12","han","han"};
-        System.out.println(jdbc.retrieve(str));
-        if (!jdbc.exists(users[0]))
-            jdbc.insert(users);            
-        else {
-                jdbc.update(users);
-                System.out.println("user name exists, change to another");
-        }
-        String uToDel = "aydinme";
-        if (jdbc.exists(uToDel)) {
-            jdbc.delete(uToDel);
-            System.out.println(jdbc.retrieve(str));
-        }
-        else
-            System.out.println(uToDel+" does not exit in the DB");
-        
-        jdbc.closeAll();
+//        String str = "select * from users";
+//        String insert = "INSERT INTO `users` (`username`, `password`) VALUES ('meaydin', 'meaydin')";
+//        String update = "UPDATE `users` SET `password`='eaydin' WHERE `username`='eaydin' ";
+//        String db = "xyz";
+//        
+//        JdbcUserQry jdbc = new JdbcUserQry(str);
+//        Connection conn = null;
+//                try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db.trim(), "root", "root");
+//        }
+//        catch(ClassNotFoundException | SQLException e){
+//            
+//        }
+//        jdbc.connect(conn);
+//        String [] users = {"birgul12","han","han"};
+//        System.out.println(jdbc.retrieve(str));
+//        if (!jdbc.exists(users[0]))
+//            jdbc.insert(users);            
+//        else {
+//                jdbc.update(users);
+//                System.out.println("user name exists, change to another");
+//        }
+//        String uToDel = "aydinme";
+//        if (jdbc.exists(uToDel)) {
+//            jdbc.delete(uToDel);
+//            System.out.println(jdbc.retrieve(str));
+//        }
+//        else
+//            System.out.println(uToDel+" does not exit in the DB");
+//        
+//        jdbc.closeAll();
     }            
 }
