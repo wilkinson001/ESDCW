@@ -41,6 +41,14 @@
         <servlet-name>approve_member</servlet-name>
         <servlet-class>com.approve_member</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>approve_claim</servlet-name>
+        <servlet-class>com.approve_claim</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>check_balances</servlet-name>
+        <servlet-class>com.check_balances</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>coursework</servlet-name>
         <url-pattern>/coursework</url-pattern>
@@ -72,6 +80,14 @@
     <servlet-mapping>
         <servlet-name>approve_member</servlet-name>
         <url-pattern>/approve_member.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>approve_claim</servlet-name>
+        <url-pattern>/approve_claim.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>check_balances</servlet-name>
+        <url-pattern>/check_balances.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -21,10 +21,10 @@
     <form action="approve_member.do" method="POST">
         <button type = "submit">Approve New Members</button><br><br><br><br>
     </form>
-    <form action="approve_claim.jsp" method="POST">
+    <form action="approve_claim.do" method="POST">
         <button type = "submit">Approve Claims</button><br><br><br><br>
     </form>    
-    <form action="check_balances.jsp" method="POST">
+    <form action="check_balances.do" method="POST">
         <button type = "submit">Check Member Balance</button><br><br><br>
     </form>
     <form action="logout.do" method="POST">
