@@ -8,52 +8,53 @@ package com;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Ashley
+ * @author Ollie
  */
-public class member extends HttpServlet {
+public class payment extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;");
-
+        
         HttpSession session = request.getSession();
         
         ServletContext sc = request.getServletContext();
         Connection con = (Connection) sc.getAttribute("connection");
         JdbcUserQry jdbc = new JdbcUserQry();
         jdbc.connect(con);
-
+        
         String uname = (String) session.getAttribute("user");
-        System.out.println(uname);
-        String bal = "0";
-        String qryClaim = "Select claims.\"id\", claims.\"date\", claims.\"rationale\", claims.\"status\", claims.\"amount\" from ROOT.claims where claims.\"mem_id\"='" + uname+"'";
-        double res;
-        String res2;
-        try {
-            res = jdbc.balance(uname);
-            res2 = jdbc.retrieve(qryClaim);
-            PrintWriter out = response.getWriter();
-            session.setAttribute("user", uname);
-            session.setAttribute("balance", res);
-            session.setAttribute("claims", res2);
-            RequestDispatcher view = request.getRequestDispatcher("memberDashboard.jsp");
-            view.forward(request,response);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(member.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        
+        double balance  = jdbc.balance(uname);
+        String payment_amount_str = request.getParameter("amount");
+        double payment_amount = Double.parseDouble(payment_amount_str);
+        double payment = balance-payment_amount;
+        
+        jdbc.payment(uname, payment);
+        balance  = jdbc.balance(uname);
+        session.setAttribute("balance", balance);
+        RequestDispatcher view = request.getRequestDispatcher("payment.jsp");
+        view.forward(request,response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

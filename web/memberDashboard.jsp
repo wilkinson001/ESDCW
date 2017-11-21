@@ -19,8 +19,10 @@
         </h1>
         <div>
 
-            <form action='memberDashboard.do' method=POST>              
+            <form action='payment.jsp' method=POST>              
                 <button type = "submit">Make a payment</button><br><br>
+                </form>
+            <form action='claim.jsp' method=POST>              
                 <button type = "submit">Make a claim</button><br><br>
             </form>
             
@@ -36,6 +38,7 @@
                 String claim = (String)session.getAttribute("claims");
                 out.print(claim);
             %> <br><br>
+            
             <button type="submit">Log Out</button>
         </div>
     </body>

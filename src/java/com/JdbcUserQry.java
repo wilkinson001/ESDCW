@@ -156,7 +156,7 @@ public class JdbcUserQry {
             rs = statement.executeQuery(query);
         }
         catch(SQLException e) {
-            System.out.println("way way"+e);
+            System.out.println("login error: "+e);
         }
         
         if(rs.next()==true){
@@ -219,6 +219,21 @@ public class JdbcUserQry {
             Logger.getLogger(JdbcUserQry.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void payment(String user, double amount){
+        String qry = "update MEMBERS set MEMBERS.\"balance\"="+amount+" where MEMBERS.\"id\"='"+user+"'";
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(qry);
+        }
+        catch(SQLException e) {
+            System.out.println("payment error: "+qry+" : "+e);
+            //results = e.toString();
+        }
+    
+    }
+    
+    
     public void delete(String user){
        
       String query = "DELETE FROM users " +

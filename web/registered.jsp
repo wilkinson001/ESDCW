@@ -20,7 +20,7 @@
         <br><br>Your username is: <% out.println(user); %>
         <br><br>Your password is: <% out.println(pword); %>
         <br><br>
-        <form action='payment.jsp' method=POST>
+        <form action='member.do' method=POST>
             <button type="submit">Continue</button>
        </form>
     </body>

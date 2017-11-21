@@ -25,6 +25,10 @@
         <servlet-name>member</servlet-name>
         <servlet-class>com.member</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>payment</servlet-name>
+        <servlet-class>com.payment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>coursework</servlet-name>
         <url-pattern>/coursework</url-pattern>
@@ -40,6 +44,10 @@
     <servlet-mapping>
         <servlet-name>member</servlet-name>
         <url-pattern>/member.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>payment</servlet-name>
+        <url-pattern>/payment.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
