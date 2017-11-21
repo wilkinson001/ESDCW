@@ -18,7 +18,7 @@
             
 %></h1>
 <div>
-    <form action="approve_members.jsp" method="POST">
+    <form action="approve_member.do" method="POST">
         <button type = "submit">Approve New Members</button><br><br><br><br>
     </form>
     <form action="approve_claim.jsp" method="POST">

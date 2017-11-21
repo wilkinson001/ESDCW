@@ -1,6 +1,6 @@
 <%-- 
-    Document   : dashboard
-    Created on : 16-Nov-2017, 20:14:15
+    Document   : approve_claim
+    Created on : 21-Nov-2017, 19:50:39
     Author     : Ollie
 --%>
 
@@ -9,12 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dashboard</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <h1>Welcome <%
-            String name = (String) request.getAttribute("user"); 
-            out.print(name);
-        %></h1>
+        <h1>Hello World!</h1>
     </body>
 </html>

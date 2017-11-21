@@ -144,7 +144,7 @@ public class JdbcUserQry {
         String results="";
         select(query);
 
-        return makeTable(rsToList());//results;
+        return makeHtmlTable(rsToList());//results;
     }
     
     
@@ -190,6 +190,22 @@ public class JdbcUserQry {
         }
         return bool;
     }
+    
+    public void approve(String user){
+        String qry = "update MEMBERS set MEMBERS.\"status\"='APPROVED' where MEMBERS.\"id\"='"+user+"'";
+        String qry2 = "update USERS set USERS.\"status\"=\"APPROVED\" where USERS.\"id\"='"+user+"'";
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(qry);
+            statement = connection.createStatement();
+            statement.executeUpdate(qry2);
+        }
+        catch(SQLException e) {
+            System.out.println("application error: "+qry+" : "+e);
+        }
+        
+    }
+    
 //    public void insert(String[] str){
 //        PreparedStatement ps = null;
 //        try {
@@ -233,6 +249,22 @@ public class JdbcUserQry {
     
     }
     
+    public int getMaxPayment(){
+        int id=0;
+        String qry = "select count(*) from PAYMENTS";
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery(qry);
+            if(rs.next()){
+                id=rs.getInt(1);
+            }
+        }
+        catch(SQLException e) {
+            System.out.println("payment count error: "+qry+" : "+e);
+            //results = e.toString();
+        }
+        return id;
+    }
     
     public void delete(String user){
        

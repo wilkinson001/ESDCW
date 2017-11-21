@@ -8,8 +8,9 @@ package com;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Ollie
  */
-public class payment extends HttpServlet {
+public class approve_member extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,36 +37,36 @@ public class payment extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        HttpSession session = request.getSession();
-        
-        ServletContext sc = request.getServletContext();
-        Connection con = (Connection) sc.getAttribute("connection");
-        JdbcUserQry jdbc = new JdbcUserQry();
-        jdbc.connect(con);
-        
-        String uname = (String) session.getAttribute("user");
-        
-        double balance  = jdbc.balance(uname);
-        String payment_amount_str = request.getParameter("amount");
-        double payment_amount = Double.parseDouble(payment_amount_str);
-        double payment = balance-payment_amount;    
-        
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String dop = df.format(new Date());
-        
-        SimpleDateFormat dft = new SimpleDateFormat("HH:mm:ss");
-        String top = dft.format(new Date());
-        int id = jdbc.getMaxPayment()+1;
-        System.out.println(id);
-        String pay = "insert into payments  values ("+id+",'"+uname+"','FEE',"+payment_amount+",'"+dop+"','"+top+"')";
-        jdbc.insert(pay);
-        jdbc.payment(uname, payment);
-        balance  = jdbc.balance(uname);
-        session.setAttribute("balance", balance);
-        RequestDispatcher view = request.getRequestDispatcher("payment.jsp");
-        view.forward(request,response);
-        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
+            
+            String uname = (String) request.getParameter("username");
+            ServletContext sc = request.getServletContext();
+            Connection con = (Connection) sc.getAttribute("connection");
+            JdbcUserQry jdbc = new JdbcUserQry();
+            jdbc.connect(con);
+            
+            if(uname!=null){
+                jdbc.approve(uname);
+            }
+            String query = "select MEMBERS.\"id\", MEMBERS.\"name\", MEMBERS.\"balance\" from ROOT.\"MEMBERS\" where MEMBERS.\"status\"='APPLIED'";
+            String data = "";
+            try {
+                data = jdbc.retrieve(query);
+            } catch (SQLException ex) {
+                Logger.getLogger(approve_member.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+            
+            
+            
+            session.setAttribute("data", data);
+            RequestDispatcher view = request.getRequestDispatcher("approve_members.jsp");
+            view.forward(request,response);
+            
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
