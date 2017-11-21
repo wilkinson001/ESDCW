@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -78,8 +79,9 @@ public class register extends HttpServlet {
                 RequestDispatcher view = request.getRequestDispatcher("register.jsp");
                 view.forward(request,response);
             }else {
-                request.setAttribute("user", uname);
-                request.setAttribute("pword", pword);
+                HttpSession session = request.getSession();
+                session.setAttribute("user", uname);
+                session.setAttribute("pword", pword);
                 RequestDispatcher view = request.getRequestDispatcher("registered.jsp");
                 view.forward(request,response);
             }
