@@ -29,6 +29,14 @@
         <servlet-name>payment</servlet-name>
         <servlet-class>com.payment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>admin</servlet-name>
+        <servlet-class>com.admin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>com.logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>coursework</servlet-name>
         <url-pattern>/coursework</url-pattern>
@@ -48,6 +56,14 @@
     <servlet-mapping>
         <servlet-name>payment</servlet-name>
         <url-pattern>/payment.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>admin</servlet-name>
+        <url-pattern>/admin.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

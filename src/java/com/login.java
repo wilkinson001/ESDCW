@@ -32,20 +32,18 @@ public class login extends HttpServlet {
             try {
                 res = jdbc.login(qry);
                 String type = jdbc.userType(uname);
-                System.out.println(type);
                 PrintWriter out = response.getWriter();
                 if(res==true){
-                    //request.setAttribute("user", uname);
-                    //request.setAttribute("type", type);
                     session.setAttribute("user",uname);
                     session.setAttribute("type", type);
-                    if(type.equals("ADMIN")){
-                        response.sendRedirect("admin.java");
+                    if(uname.equals("admin")){
+                        response.sendRedirect("admin.do");
                     }else {
                         response.sendRedirect("member.do");
                     }
                 } else {
-                    out.println("Username or Password is Incorrect");
+                    out.println("Username or Password is Incorrect<br><br>");
+                    out.println("<button action=");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);

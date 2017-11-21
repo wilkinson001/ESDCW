@@ -22,10 +22,13 @@
             <form action='payment.jsp' method=POST>              
                 <button type = "submit">Make a payment</button><br><br>
                 </form>
-            <form action='claim.jsp' method=POST>              
-                <button type = "submit">Make a claim</button><br><br>
-            </form>
-            
+            <% 
+                String type = (String) session.getAttribute("type");
+                String button = "<form action='claim.jsp' method=POST><button type = \"submit\">Make a claim</button><br><br></form>";
+                if(type.trim().equals("APPROVED".trim())){
+                    out.println(button);
+                }
+            %>
             <label><b>Outstanding balance: </b></label>
             <%
                 Object b = session.getAttribute("balance");
@@ -38,8 +41,9 @@
                 String claim = (String)session.getAttribute("claims");
                 out.print(claim);
             %> <br><br>
-            
-            <button type="submit">Log Out</button>
+            <form action="logout.do" method="POST">
+                <button type="submit">Log Out</button>
+            </form>
         </div>
     </body>
 </html>
