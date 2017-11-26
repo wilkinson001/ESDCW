@@ -10,18 +10,27 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="pagecss.css" />
     </head>
-    <body>
-        <h1>Please enter your login details</h1>
-        <div>
+    <body background="grd.jpg">
+        <h1>Member Login</h1>
+        
+        <div id = "loginpage">
             <form action='login.do' method=POST>
-                <label><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" required>
-
-                <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" required>
-
-                <button type="submit">Login</button>
+                
+                <div><label>
+                 <b>Username</b></label>
+                 <input type="text" placeholder="Enter Username" name="username" required>
+                </div>
+                
+                <div>
+                 <label><b>Password</b></label>
+                 <input type="password" placeholder="Enter Password" name="password" required>
+                </div>
+                
+                <div>
+                 <button type="submit">Login</button>
+                </div>
             </form>
         </div>
     </body>

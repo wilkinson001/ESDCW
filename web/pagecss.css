@@ -1,0 +1,55 @@
+
+/* 
+    Created on : Nov 26, 2017, 3:02:27 PM
+    Author     : Maciej
+*/
+
+
+*{
+    font-family: Georgia, sans-serif;
+}
+input[type=text] {
+    width: 150px;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+input[type=password]{
+    width: 150px;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+}
+
+body{
+    background-size: 100%;
+}
+
+div.registerpage{
+    display: table;
+}
+
+div.registerpage label, input {
+  display: table-cell;
+}
+
+div.admindash{
+    margin-left: 20px;
+}
+
+input{
+    width: 200px;
+}

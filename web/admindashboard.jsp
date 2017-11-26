@@ -10,22 +10,24 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin Dashboard</title>
+        <link rel="stylesheet" type="text/css" href="pagecss.css" />
     </head>
-    <body>
-        <h1>Welcome <%
+    <body background="grd.jpg">
+        
+        <h1>Welcome, <%
             String name = (String) session.getAttribute("user"); 
             out.print(name);
             
 %></h1>
-<div>
+<div class = admindash>
     <form action="approve_member.do" method="POST">
-        <button type = "submit">Approve New Members</button><br><br><br><br>
+        <button type = "submit">Approve New Members</button><br><br>
     </form>
     <form action="approve_claim.do" method="POST">
-        <button type = "submit">Approve Claims</button><br><br><br><br>
+        <button type = "submit">Approve Claims</button><br><br>
     </form>    
     <form action="check_balances.do" method="POST">
-        <button type = "submit">Check Member Balance</button><br><br><br>
+        <button type = "submit">Check Member Balance</button><br><br>
     </form>
     <form action="logout.do" method="POST">
         <button type="submit">Log Out</button>

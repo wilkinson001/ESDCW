@@ -10,22 +10,33 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>XYZ Registration</title>
+        <link rel="stylesheet" type="text/css" href="pagecss.css" />
+        
     </head>
-    <body>
+    <body background="grd.jpg">
         <h1>Please enter your details to register</h1>
-        <div>
+        <div class = registerpage>
             <form action='register.do' method=POST>
+                
+                
                 <label><b>First Name</b></label>
-                <input type="text" placeholder="Enter First Name" name="fname" required><br><br>
+                <input type="text" placeholder="Enter First Name" name="fname" required>
+                
+                
                 
                 <label><b>Surname</b></label>
-                <input type="text" placeholder="Enter Surname" name="sname" required><br><br>
-
+                <input type="text" placeholder="Enter Surname" name="sname" required>
+                
+               
+                
                 <label><b>Address</b></label>
-                <input type="text" placeholder="Enter Address" name="add" required><br><br>
+                <input type="text" placeholder="Enter Address" name="add" required>
+                
+                
                 
                 <label><b>Date of Birth</b></label>
-                <input type="date" placeholder="Enter Date of Birth" name="dob" required><br><br>
+                <input type="date" placeholder="Enter Date of Birth" name="dob" required>
+                
             <%    
             String error = (String) request.getAttribute("error");
             
@@ -33,8 +44,9 @@
                 out.println(error+"<br>");
             }
             %>
-                <button type="submit">Register</button>
+                
             </form>
         </div>
+            <button type="submit">Register</button>
     </body>
 </html>
