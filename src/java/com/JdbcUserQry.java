@@ -179,6 +179,7 @@ public class JdbcUserQry {
     
     public boolean exists(String user) {
         boolean bool = false;
+        user=user.toLowerCase();
         try  {
             select("select USERS.\"id\" from ROOT.users where USERS.\"id\"='"+user+"'");
             if(rs.next()) {

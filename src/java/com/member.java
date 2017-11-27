@@ -35,6 +35,7 @@ public class member extends HttpServlet {
         jdbc.connect(con);
 
         String uname = (String) session.getAttribute("user");
+
         String bal = "0";
         String qryClaim = "Select claims.\"id\", claims.\"date\", claims.\"rationale\", claims.\"status\", claims.\"amount\" from ROOT.claims where claims.\"mem_id\"='" + uname+"'";
         double res;
@@ -42,6 +43,7 @@ public class member extends HttpServlet {
         try {
             res = jdbc.balance(uname);
             res2 = jdbc.retrieve(qryClaim);
+            System.out.println(uname+" "+res+" "+res2);
             PrintWriter out = response.getWriter();
             session.setAttribute("user", uname);
             session.setAttribute("balance", res);

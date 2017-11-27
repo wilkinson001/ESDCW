@@ -62,7 +62,7 @@ public class register extends HttpServlet {
             String uuid = UUID.randomUUID().toString();
             String pword = uuid.replace("-", "");
             pword = pword.substring(0,8);
-            
+
             System.out.println(name);
             System.out.println(address);
             System.out.println(pword);
@@ -82,6 +82,7 @@ public class register extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", uname);
                 session.setAttribute("pword", pword);
+                session.setAttribute("type", "APPLIED");
                 RequestDispatcher view = request.getRequestDispatcher("registered.jsp");
                 view.forward(request,response);
             }

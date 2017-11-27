@@ -36,10 +36,14 @@
                 //String balance = (String) session.getAttribute("balance");
                 out.print("£" + balance);
             %> <br><br>
-            <label><b>Claims made: </b> </label>
             <%
                 String claim = (String)session.getAttribute("claims");
-                out.print(claim);
+                if(!claim.equals("<table border=\"3\"></table>")){
+                    out.print("<label><b>Claims made: </b> </label>");
+                    out.print(claim);
+                } else {
+                    out.print("<b>No Claims Made<b>");
+                }
             %> <br><br>
             <form action="logout.do" method="POST">
                 <button type="submit">Log Out</button>
