@@ -44,9 +44,9 @@
                 out.println(error+"<br>");
             }
             %>
-                
+            <br><button type="submit">Register</button>    
             </form>
         </div>
-            <button type="submit">Register</button>
+            
     </body>
 </html>
