@@ -10,8 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Member dashboard</title>
+        <link rel="stylesheet" type="text/css" href="pagecss.css" />
     </head>
-    <body>
+    <body background="grd.jpg">
         <h1>Welcome <%
             String name = (String) session.getAttribute("user");
             out.print(name);

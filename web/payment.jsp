@@ -10,8 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Payment Page</title>
+        <link rel="stylesheet" type="text/css" href="pagecss.css" />
     </head>
-    <body>
+    <body background="grd.jpg">
         <h1>Pay outstanding balance</h1><br>
         
         <%
