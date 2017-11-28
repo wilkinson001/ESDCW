@@ -207,6 +207,30 @@ public class JdbcUserQry {
         
     }
     
+    public void approveClaim(String claim_id){
+        String qry = "update CLAIMS set CLAIMS.\"status\"='APPROVED' where CLAIMS.\"id\"='"+claim_id+"'";
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(qry);
+        }
+        catch(SQLException e) {
+            System.out.println("approve claim error: "+qry+" : "+e);
+        }
+        
+    }
+    
+    public void rejectClaim(String claim_id){
+        String qry = "update CLAIMS set CLAIMS.\"status\"='DENIED' where CLAIMS.\"id\"="+claim_id+"";
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(qry);
+        }
+        catch(SQLException e) {
+            System.out.println("reject claim error: "+qry+" : "+e);
+        }
+        
+    }
+    
 //    public void insert(String[] str){
 //        PreparedStatement ps = null;
 //        try {

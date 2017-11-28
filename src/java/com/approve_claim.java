@@ -7,10 +7,17 @@ package com;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -18,29 +25,42 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class approve_claim extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet approve_claim</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet approve_claim at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            HttpSession session = request.getSession();
+            
+            String claim_id = (String) request.getParameter("claim");
+            String reject_claim_id = (String) request.getParameter("reject_claim");
+            ServletContext sc = request.getServletContext();
+            Connection con = (Connection) sc.getAttribute("connection");
+            JdbcUserQry jdbc = new JdbcUserQry();
+            jdbc.connect(con);
+            
+            if(claim_id!=null){
+                jdbc.approveClaim(claim_id);
+            }
+            
+            if(reject_claim_id!=null){
+                jdbc.rejectClaim(reject_claim_id);
+            }
+            
+            
+            String query = "select * from CLAIMS where CLAIMS.\"status\"='APPLIED'";
+            //add count of claims in past year to query
+            String data = "";
+            try {
+                data = jdbc.retrieve(query);
+            } catch (SQLException ex) {
+                Logger.getLogger(approve_member.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            session.setAttribute("data", data);
+            RequestDispatcher view = request.getRequestDispatcher("approve_claim.jsp");
+            view.forward(request,response);
         }
     }
 

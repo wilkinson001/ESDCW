@@ -13,6 +13,35 @@
         <link rel="stylesheet" type="text/css" href="pagecss.css" />
     </head>
     <body background="grd.jpg">
-        <h1>Hello World!</h1>
+        <h1>Check and Approve Members</h1>
+        
+        <% 
+            String data = (String) session.getAttribute("data");
+            
+            if(!data.trim().equals("<table border=\"3\"></table>")){
+                out.print("<h3>Claims</h3><br><br><br>");
+                out.print(data);
+            }else{
+                out.print("<h3>No outstanding claims</h3>");
+            }
+        
+        %>
+        <br><br>
+        <h3>Enter Claim ID to approve</h3><br><br>
+        <form action="approve_claim.do" method="POST">
+            <input type="text" placeholder="Enter claim id" name="claim" required>
+            <br><br>
+            <button type="submit">Approve Claim</button>
+        </form>
+        <br><br>
+        <form action="approve_claim.do" method="POST">
+            <input type="text" placeholder="Enter claim id" name="reject_claim" required>
+            <br><br>
+            <button type="submit">Reject Claim</button>
+        </form>
+        
+        <form action="admin.do" method="POST"><br><br>
+            <button type="submit">Return to Dashboard</button>
+        </form>
     </body>
 </html>

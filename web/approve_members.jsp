@@ -18,9 +18,11 @@
         <% 
             String data = (String) session.getAttribute("data");
             
-            if(!data.trim().equals("null")){
+            if(!data.trim().equals("<table border=\"3\"></table>")){
                 out.print("<h3>Membership applications</h3><br><br><br>");
                 out.print(data);
+            }else{
+                out.print("<h3>No outstanding applications</h3>");
             }
         
         %>
