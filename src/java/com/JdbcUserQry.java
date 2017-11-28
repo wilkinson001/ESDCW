@@ -250,6 +250,19 @@ public class JdbcUserQry {
     
     }
     
+    public void claim(int id, String uname, String rat, double val, java.sql.Date date){
+        String qry = "insert into CLAIMS values ("+id+",'"+uname+"','"+date+"','"+rat+"','APPLIED',"+val+")";
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(qry);
+        }
+        catch(SQLException e) {
+            System.out.println("claim error: "+qry+" : "+e);
+            //results = e.toString();
+        }
+
+    }
+    
     public int getMaxPayment(){
         int id=0;
         String qry = "select count(*) from PAYMENTS";
@@ -262,6 +275,23 @@ public class JdbcUserQry {
         }
         catch(SQLException e) {
             System.out.println("payment count error: "+qry+" : "+e);
+            //results = e.toString();
+        }
+        return id;
+    }
+    
+    public int getMaxClaim(){
+        int id=0;
+        String qry = "select count(*) from CLAIMS";
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery(qry);
+            if(rs.next()){
+                id=rs.getInt(1);
+            }
+        }
+        catch(SQLException e) {
+            System.out.println("claim count error: "+qry+" : "+e);
             //results = e.toString();
         }
         return id;

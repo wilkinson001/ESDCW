@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Make a new Claim</title>
+        <link rel="stylesheet" type="text/css" href="pagecss.css" />
     </head>
     <body background="grd.jpg">
         <h1>Please enter the details of your new claim</h1>
@@ -18,23 +19,25 @@
                 
                 
                 <label><b>Date</b></label>
-                <input type="text" placeholder="Enter the date that your claim occurred" name="date" required>
+                <input type="date" placeholder="Date that your claim occurred" name="date" required>
                 
                 
                 
                 <label><b>Rationale</b></label>
-                <input <textarea name="Text1" cols="40" rows="20"></textarea>
->
+                <textarea name="rat" cols="40" rows="20"></textarea>
                 
                
                 
                 <label><b>Value</b></label>
-                <input type="text" placeholder="£" name="value" required>
+                <input type="number" placeholder="£" name="val" required>
                 
                 
-            
+                <br>
                 <button type="submit">Claim</button>
-            </form>
+            </form><br>
+            <form action='member.do' method='POST'>
+            <button type="submit">Return to dashboard</button>
+        </form>
         </div>
             
     </body>
