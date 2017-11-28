@@ -27,7 +27,10 @@
         <button type = "submit">Approve Claims</button><br><br>
     </form>    
     <form action="check_balances.do" method="POST">
-        <button type = "submit">Check Member Balance</button><br><br>
+        <button type = "submit">Check Member Balances</button><br><br>
+    </form>
+    <form action="charge.do" method="POST">
+        <button type = "submit">Calculate annual charge</button><br><br>
     </form>
     <form action="logout.do" method="POST">
         <button type="submit">Log Out</button>

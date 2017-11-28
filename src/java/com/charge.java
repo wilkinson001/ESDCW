@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Ollie
  */
-public class check_balances extends HttpServlet {
+public class charge extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,22 +38,42 @@ public class check_balances extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            
             HttpSession session = request.getSession();
+            
+            String uname = (String) request.getParameter("username");
+            String charge_members = (String) request.getParameter("charge_members");
             
             ServletContext sc = request.getServletContext();
             Connection con = (Connection) sc.getAttribute("connection");
             JdbcUserQry jdbc = new JdbcUserQry();
             jdbc.connect(con);
-            String query = "select MEMBERS.\"id\", MEMBERS.\"name\", MEMBERS.\"balance\" from ROOT.\"MEMBERS\"";
-            String data = "";
+            session.setAttribute("res", null);
+            String data="";
+            
+            double annual_charge=0;
+            int num_members=0;
+            double ind_amount = 0;
             try {
-                data = jdbc.retrieve(query);
+                annual_charge = jdbc.annualCharge();
+                num_members=jdbc.numMembers();
+                ind_amount=annual_charge/num_members;
+                if(charge_members!=null){
+                    jdbc.chargeMembers(ind_amount);
+                    session.setAttribute("res", "Successfully charged members");
+                }
             } catch (SQLException ex) {
-                Logger.getLogger(approve_member.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(charge.class.getName()).log(Level.SEVERE, null, ex);
             }
-            session.setAttribute("data", data);
-            RequestDispatcher view = request.getRequestDispatcher("check_balances.jsp");
+            
+            
+            
+            
+            session.setAttribute("charge", String.valueOf(annual_charge));
+            session.setAttribute("data", String.valueOf(ind_amount));
+            RequestDispatcher view = request.getRequestDispatcher("charge.jsp");
             view.forward(request,response);
+            
         }
     }
 

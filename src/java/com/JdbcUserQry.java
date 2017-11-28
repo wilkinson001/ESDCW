@@ -231,6 +231,48 @@ public class JdbcUserQry {
         
     }
     
+    public double annualCharge() throws SQLException{
+        double charge=0;
+        String qry="select SUM(CLAIMS.\"amount\") from CLAIMS where (YEAR(CURRENT_DATE)-YEAR(CLAIMS.\"date\"))=0 and (MONTH(CURRENT_DATE)-MONTH(CLAIMS.\"date\"))<12";
+        select(qry);
+        if(rs.next()){
+            charge = rs.getDouble(1);
+            System.out.println(charge);
+        }
+
+        
+        return charge;
+    }
+    
+    public void chargeMembers(double charge) throws SQLException{
+        String qry="";
+        String qry1="select MEMBERS.\"id\" from MEMBERS where MEMBERS.\"status\"='APPROVED'";
+        select(qry1);        
+        while(rs.next()){
+            String mem = rs.getString(1);
+            qry="update MEMBERS SET MEMBERS.\"balance\"=MEMBERS.\"balance\"+"+charge+" where MEMBERS.\"id\"='"+mem+"'";
+            
+            try {
+                statement = connection.createStatement();
+                statement.executeUpdate(qry);
+            }
+            catch(SQLException e) {
+                System.out.println("charge members error: "+qry+" : "+e);
+            }   
+        }
+    }
+    
+    public int numMembers() throws SQLException{
+        int num=0;
+        String qry="select count(*) from MEMBERS where MEMBERS.\"status\"='APPROVED'";
+        select(qry);
+        if(rs.next()){
+            num = rs.getInt(1);
+            System.out.println(num);
+        }
+        return num;
+    }
+    
 //    public void insert(String[] str){
 //        PreparedStatement ps = null;
 //        try {

@@ -46,12 +46,16 @@
         <servlet-class>com.approve_claim</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>check_balances</servlet-name>
-        <servlet-class>com.check_balances</servlet-class>
+        <servlet-name>charge</servlet-name>
+        <servlet-class>com.charge</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>claim</servlet-name>
         <servlet-class>com.claim</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>check_balances</servlet-name>
+        <servlet-class>com.check_balances</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>coursework</servlet-name>
@@ -90,12 +94,16 @@
         <url-pattern>/approve_claim.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>check_balances</servlet-name>
-        <url-pattern>/check_balances.do</url-pattern>
+        <servlet-name>charge</servlet-name>
+        <url-pattern>/charge.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>claim</servlet-name>
         <url-pattern>/claim.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>check_balances</servlet-name>
+        <url-pattern>/check_balances.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

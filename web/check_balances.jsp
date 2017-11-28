@@ -1,6 +1,6 @@
 <%-- 
-    Document   : check_balances
-    Created on : 21-Nov-2017, 19:50:54
+    Document   : approve_members
+    Created on : 21-Nov-2017, 19:50:23
     Author     : Ollie
 --%>
 
@@ -9,10 +9,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Check Member Balances</title>
         <link rel="stylesheet" type="text/css" href="pagecss.css" />
     </head>
     <body background="grd.jpg">
-        <h1>Hello World!</h1>
+        <h1>Check Member Balances</h1>
+        
+        <% 
+            String data = (String) session.getAttribute("data");
+            out.print(data);
+        %>
+        <br><br>      
+        <form action="admin.do" method="POST"><br><br>
+            <button type="submit">Return to Dashboard</button>
+        </form>
+        
     </body>
 </html>
