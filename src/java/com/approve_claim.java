@@ -49,7 +49,7 @@ public class approve_claim extends HttpServlet {
             }
             
             
-            String query = "select * from CLAIMS where CLAIMS.\"status\"='APPLIED'";
+            String query = "select a.*, b.\"total\" from CLAIMS a JOIN (select CLAIMS.\"mem_id\", count(CLAIMS.\"mem_id\") as \"total\" from CLAIMS where (YEAR(CURRENT_DATE)-YEAR(CLAIMS.\"date\"))=0 and (MONTH(CURRENT_DATE)-MONTH(CLAIMS.\"date\"))<12 group by CLAIMS.\"mem_id\") b on a.\"mem_id\" = b.\"mem_id\" where a.\"status\"='APPLIED' and (YEAR(CURRENT_DATE)-YEAR(a.\"date\"))=0 and (MONTH(CURRENT_DATE)-MONTH(a.\"date\"))<12 order by a.\"id\"\n";
             //add count of claims in past year to query
             String data = "";
             try {
