@@ -18,15 +18,15 @@
         <div id = "loginpage">
             <form action='login.do' method=POST>
                 
-                <div><label>
-                 <b>Username</b></label>
-                 <input type="text" placeholder="Enter Username" name="username" required>
+                <div>
+                    <div class = left><label><b>Username</b></label></div>
+                    <div class = right><input type="text" placeholder="Enter Username" name="username" required></div>
                 </div>
                 
-                <div>
-                 <label><b>Password</b></label>
-                 <input type="password" placeholder="Enter Password" name="password" required>
-                </div>
+                 <div>
+                     <div class = left<label><b>Password</b></label></div>
+                     <div class = right><input type="password" placeholder="Enter Password" name="password" required></div>
+                 </div>
                 
                 <div>
                  <button type="submit">Login</button>

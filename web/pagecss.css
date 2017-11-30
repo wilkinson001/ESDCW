@@ -53,3 +53,15 @@ div.admindash{
 input{
     width: 200px;
 }
+
+.left{
+    width: 30%;
+    float: left;
+    text-align: right;
+}
+
+.right{
+    width: 65%;
+    margin-left: 10px;
+    float:left;
+}
